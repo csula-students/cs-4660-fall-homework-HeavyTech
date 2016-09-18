@@ -20,6 +20,7 @@ public class AdjacencyMatrix implements Representation {
     //private Node[] nodes;
     private ArrayList<Node> nodes = new ArrayList<>();
     private int[][] adjacencyMatrix;
+    private int nodeCount = 0;
 
     public AdjacencyMatrix(File file) {
 
@@ -92,6 +93,7 @@ public class AdjacencyMatrix implements Representation {
                     adjacencyMatrix[i][j] = matrix[i][j];
                 }
             }
+            nodeCount++;
             status = true;
         }
         return status;
@@ -99,14 +101,35 @@ public class AdjacencyMatrix implements Representation {
 
     @Override
     public boolean removeNode(Node x) {
-        return false;
+        boolean status = false;
+        int node = (int)x.getData();
+
+        if(node == -1 ){
+            status = false;
+        }
+
+
+        return status;
     }
 
     @Override
     public boolean addEdge(Edge x) {
 
+        boolean status = false;
+        if(adjacencyMatrix == null){
+            int size = nodes.size();
+            adjacencyMatrix = new int[size][size];
+            status =false;
+        }else {
 
-        return false;
+            int fromNode = (int) x.getFrom().getData();
+            int toNode = (int) x.getTo().getData();
+
+            adjacencyMatrix[fromNode][toNode] = 1;
+            status = true;
+        }
+
+        return status;
     }
 
     @Override
