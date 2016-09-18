@@ -79,7 +79,7 @@ public class AdjacencyMatrix implements Representation {
             status = false;
         }
         nodes.add(x);
-        int[][] matrx = adjacencyMatrix;
+        int[][] matrix = adjacencyMatrix;
 
         //Creating a new matrix with adjusted Nodes.
         adjacencyMatrix = new int[nodes.size()][nodes.size()];
@@ -89,7 +89,7 @@ public class AdjacencyMatrix implements Representation {
                 if(i == nodes.size() - 1 || j == nodes.size() -1){
                     adjacencyMatrix[i][j] = 0;
                 }else{
-                    adjacencyMatrix[i][j] = matrx[i][j];
+                    adjacencyMatrix[i][j] = matrix[i][j];
                 }
             }
             status = true;

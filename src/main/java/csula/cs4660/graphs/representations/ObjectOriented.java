@@ -72,15 +72,30 @@ public class ObjectOriented implements Representation  {
     }
     @Override
     public boolean adjacent(Node x, Node y) {
-        List<Node> adj = new ArrayList<>();
-    //    adj = hMap.get(x).contains(y);
-        return true;
+        boolean status = false;
+
+        for(Edge e : edges){
+            if((e.getTo().equals(x)) && e.getFrom().equals(y) || e.getTo().equals(y) && e.getFrom().equals(x)) {
+                status = true;
+            }
+            else{
+                status = false;
+            }
+        }
+
+        return status;
     }
     @Override
-    public List<Node> neighbors(Node x)
+    public List<Node> neighbors(Node x) {
 
-    {
-        return null;
+        List<Node> neighbors  = new ArrayList<>();
+
+        for(Edge e : edges){
+            if(e.getFrom().equals(x)){
+                neighbors.add(e.getTo());
+            }
+        }
+        return neighbors;
     }
 
     @Override
@@ -99,8 +114,13 @@ public class ObjectOriented implements Representation  {
 
     @Override
     public boolean removeNode(Node x) {
-
-    return true;
+        boolean status = false;
+        if(!nodes.contains(x)){
+            status = false;
+        }else{
+            status = true;
+        }
+        return status;
     }
 
     @Override
