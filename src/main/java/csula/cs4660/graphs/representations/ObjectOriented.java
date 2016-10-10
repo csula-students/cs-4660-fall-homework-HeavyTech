@@ -95,6 +95,11 @@ public class ObjectOriented implements Representation  {
                 neighbors.add(e.getTo());
             }
         }
+
+        if(neighbors != null){
+            return neighbors;
+        }
+
         return neighbors;
     }
 
@@ -114,11 +119,19 @@ public class ObjectOriented implements Representation  {
 
     @Override
     public boolean removeNode(Node x) {
-        boolean status = false;
-        if(!nodes.contains(x)){
-            status = false;
-        }else{
-            status = true;
+        boolean status = true;
+
+        if (!nodes.contains(x))
+            return false;
+
+        nodes.remove(x);    //Removing the node from the list.
+
+        for (Edge e : edges) {
+            if (e.getTo().equals(x) || e.getFrom().equals(x)) {
+                nodes.remove(x);
+                return status;
+
+            }
         }
         return status;
     }
