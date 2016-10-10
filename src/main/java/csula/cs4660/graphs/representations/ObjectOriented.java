@@ -139,9 +139,17 @@ public class ObjectOriented implements Representation  {
     @Override
     public boolean addEdge(Edge x) {
 
-        Node toNode = x.getFrom();
-        hMap.get(toNode).add(x);
-        return hMap.get(toNode).contains(x);
+//        Node toNode = x.getFrom();
+//        hMap.get(toNode).add(x);
+//        return hMap.get(toNode).contains(x);
+
+        if(!edges.contains(x)){
+            edges.add(x);
+            return true;
+        }
+        return false;
+
+
 
     }
 

@@ -92,32 +92,56 @@ public class AdjacencyList implements Representation {
     public boolean addNode(Node x) {
 
         boolean status;
-        if(nodes.contains(x)){
-            status = false;
-        }else{
+        if(!nodes.contains(x)){
             nodes.add(x);
             status = true;
+        }else{
+            status = false;
         }
            return status;
     }
 
     @Override
     public boolean removeNode(Node x) {
+        if(nodes.contains(x)) {
+            nodes.remove(x);
+            map.removeAll(x);
+            Map<Node, Edge> remove = new HashMap<>();
+            for (Map.Entry entry : map.entries()) {
+                Edge edge = (Edge) entry.getValue();
+                if (edge.getTo().equals(x)) {
+                    Node node = (Node) entry.getKey();
+                    remove.put(node, edge);
+                }
+            }
+            for (Node key : remove.keySet()) {
+                map.remove(key, remove.get(key));
+            }
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean addEdge(Edge x) {
 
+        Node fromNode = x.getFrom();
+        Node toNode = x.getTo();
+        if(nodes.contains(fromNode) && nodes.contains(toNode)){
 
-
-
+            if(!map.get(fromNode).contains(x)){
+                map.put(fromNode,x);
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public boolean removeEdge(Edge x) {
         Node fromNode = x.getFrom();
+        Node toNode = x.getTo();
+
         map.get(fromNode).remove(x);
 
         return !map.get(fromNode).contains(x);
