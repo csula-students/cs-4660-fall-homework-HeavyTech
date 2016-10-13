@@ -156,10 +156,14 @@ public class ObjectOriented implements Representation  {
     @Override
     public boolean removeEdge(Edge x) {
 
-        Node fromNode = x.getFrom();
-        hMap.get(fromNode).remove(x);
+//        Node fromNode = x.getFrom();
+//        hMap.get(fromNode).remove(x);
+//
+//       return !hMap.get(fromNode).contains(x);
+        if(!edges.contains(x)) return false;
 
-       return !hMap.get(fromNode).contains(x);
+        edges.remove(x);
+        return true;
     }
 
     @Override

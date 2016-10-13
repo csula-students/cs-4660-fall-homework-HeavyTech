@@ -142,9 +142,14 @@ public class AdjacencyList implements Representation {
         Node fromNode = x.getFrom();
         Node toNode = x.getTo();
 
-        map.get(fromNode).remove(x);
+        if(nodes.contains(fromNode) && nodes.contains(toNode)){
+            if(map.get(fromNode).contains(x)){
+                map.remove(fromNode,x);
+                return true;
+            }
 
-        return !map.get(fromNode).contains(x);
+        }
+        return false;
     }
     @Override
     public int distance(Node from, Node to) {

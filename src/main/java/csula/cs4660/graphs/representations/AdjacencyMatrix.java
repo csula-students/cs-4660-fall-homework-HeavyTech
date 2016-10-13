@@ -61,7 +61,7 @@ public class AdjacencyMatrix implements Representation {
          int row = (int)x.getData();
          int col = (int)y.getData();
 
-        if(adjacencyMatrix[row][col] == 1){
+        if(adjacencyMatrix[row][col] == 1 || adjacencyMatrix[col][row] ==1){
             status = true;
         }
 
@@ -70,8 +70,28 @@ public class AdjacencyMatrix implements Representation {
 
     @Override
     public List<Node> neighbors(Node x) {
-        return null;
-    }
+
+        boolean status = false;
+        int pos = 0;
+
+        for(int i = 0; i < nodes.size(); i ++){
+            if(nodes.get(i).equals(x)){
+                status = true;
+                pos = i;
+                break;
+            }
+        }
+        if(!status) return null;
+
+        ArrayList<Node> neighbors = new ArrayList<>();
+        for(int i = 0; i < adjacencyMatrix[pos].length;i++) {
+            if (adjacencyMatrix[pos][i] > 0) {
+                neighbors.add(nodes.get(i));
+            }
+        }
+        return neighbors;
+
+        }
 
     @Override
     public boolean addNode(Node x){
@@ -101,15 +121,14 @@ public class AdjacencyMatrix implements Representation {
 
     @Override
     public boolean removeNode(Node x) {
-        boolean status = false;
-        int node = (int)x.getData();
-
-        if(node == -1 ){
-            status = false;
+        if(!nodes.contains(x)){
+            return false;
         }
+        nodes.remove(x);
+        int point = (int)x.getData();
 
 
-        return status;
+        return false;
     }
 
     @Override
