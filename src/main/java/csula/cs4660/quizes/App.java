@@ -19,10 +19,13 @@ public class App {
         System.out.println(Client.stateTransition(initialState.getId(), initialState.getNeighbors()[0].getId()));
 
 
+        search(initialState,endingState);
+
+
     }
 
 
-    private static void BFS(State initialState, State endingState) {
+    private static void search(State initialState, State endingState) {
 
         Queue<State> queue = new LinkedList<>();
         Set<State> visited = new HashSet<>();
@@ -37,9 +40,15 @@ public class App {
             State currState = queue.poll();
             visited.add(currState);
 
-            if (currState.getId().equals("e577aa79473673f6158cc73e0e5dc122")) {
+            for(State s : Client.getState(currState.getId()).get().getNeighbors()){
 
-                
+                if (s.getId().equals("e577aa79473673f6158cc73e0e5dc122")) {
+                    System.out.println("Path with a depth of " + findPath(parent,currState,initialState));
+                }
+                if(!visited.contains(s)){
+                    parent.put(s,currState);
+                    queue.add(s);
+                }
             }
 
 
@@ -49,13 +58,13 @@ public class App {
     public static int findPath(Map<State, State> parents, State current, State start) {
 
         State state = current;
-        int depth = 0;
+        int path = 0;
 
         while (!state.equals(start)) {
-            depth++;
+            path++;
             state = parents.get(state);
         }
-        return depth;
+        return path;
 
 
     }
