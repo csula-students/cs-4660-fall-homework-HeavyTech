@@ -1,5 +1,6 @@
 package csula.cs4660.quizes;
 
+import csula.cs4660.quizes.models.DTO;
 import csula.cs4660.quizes.models.State;
 
 import java.util.*;
@@ -18,37 +19,43 @@ public class App {
         System.out.println(Client.stateTransition(initialState.getId(), initialState.getNeighbors()[0].getId()));
 
 
-
-
-
-
     }
 
 
-    private static void BFS(State initialState, State endingState){
+    private static void BFS(State initialState, State endingState) {
 
         Queue<State> queue = new LinkedList<>();
-        Set<State>  explored = new HashSet<>();
-        Map<State,State> parent = new HashMap<>();
-        boolean status = false;
+        Set<State> visited = new HashSet<>();
+        Map<State, State> parent = new HashMap<>();
+
 
         queue.add(initialState);
+        visited.add(initialState);
 
-        while(!queue.isEmpty()){
 
+        while (!queue.isEmpty()) {
             State currState = queue.poll();
-            explored.add(currState);
+            visited.add(currState);
 
-            if(currState.getId().equals("e577aa79473673f6158cc73e0e5dc122")){
+            if (currState.getId().equals("e577aa79473673f6158cc73e0e5dc122")) {
 
-                status = true;
-
-
+                
             }
 
 
         }
+    }
 
+    public static int findPath(Map<State, State> parents, State current, State start) {
+
+        State state = current;
+        int depth = 0;
+
+        while (!state.equals(start)) {
+            depth++;
+            state = parents.get(state);
+        }
+        return depth;
 
 
     }
