@@ -44,11 +44,9 @@ public class App {
 
             for(State s : Client.getState(currState.getId()).get().getNeighbors()){
 
-                if (s.getId().equals(endingState)) {
+                if (s.getId().equals("e577aa79473673f6158cc73e0e5dc122")) {
                     System.out.println("Path with a depth of " + findPath(parent,currState,initialState));
-                    System.out.println(parent.get(endingState).getLocation().getName() + ":" + endingState.getLocation().getName() +
-                            ":" + Client.stateTransition(parent.get(endingState).getId() ,
-                            endingState.getId()).get().getEvent().getEffect());
+
                 }
                 else if(!visited.contains(s)){
                     parent.put(s,currState);
