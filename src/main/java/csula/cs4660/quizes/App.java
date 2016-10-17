@@ -36,16 +36,18 @@ public class App {
         visited.add(initialState);
 
 
+        //e577aa79473673f6158cc73e0e5dc122
+
         while (!queue.isEmpty()) {
             State currState = queue.poll();
             visited.add(currState);
 
             for(State s : Client.getState(currState.getId()).get().getNeighbors()){
 
-                if (s.getId().equals("e577aa79473673f6158cc73e0e5dc122")) {
+                if (s.getId().equals(endingState)) {
                     System.out.println("Path with a depth of " + findPath(parent,currState,initialState));
                 }
-                if(!visited.contains(s)){
+                else if(!visited.contains(s)){
                     parent.put(s,currState);
                     queue.add(s);
                 }
