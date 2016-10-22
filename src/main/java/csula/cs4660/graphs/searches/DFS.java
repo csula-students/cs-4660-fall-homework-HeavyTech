@@ -24,7 +24,7 @@ public class DFS implements SearchStrategy {
         System.out.println("------------");
         System.out.println("----DFS-----");
         System.out.println("------------");
-        
+
         List<Edge> resultPath = new ArrayList<>();
 
         if (currentNode.equals(dist)) {
@@ -40,13 +40,12 @@ public class DFS implements SearchStrategy {
             return resultPath;
         }
 
+
+        //Recursively creating a path
         for (Node n : graph.neighbors(currentNode)) {
             if (!nodeMap.containsKey(n)) {
                 nodeMap.put(n, currentNode);
                 resultPath = DFS(graph, source, dist, n, nodeMap);
-            }
-            if (!resultPath.isEmpty()) {
-                System.out.println("Nothing in this list");
             }
 
         }
