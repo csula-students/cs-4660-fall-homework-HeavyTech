@@ -4,10 +4,7 @@ import csula.cs4660.graphs.Edge;
 import csula.cs4660.graphs.Graph;
 import csula.cs4660.graphs.Node;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * As name, dijkstra search using graph structure
@@ -37,11 +34,12 @@ public class DijkstraSearch implements SearchStrategy {
     public List<Edge> search(Graph graph, Node source, Node dist) {
 
 
-        Edge edge = null;
+
         int distance = 0;
         Node endNode = null;
 
         HashMap<Node,Node> nodeMap = new HashMap<>();
+        List<Node> acum = new ArrayList<>();
         Queue<Node> queue = new LinkedList<>();
 
 
@@ -55,8 +53,18 @@ public class DijkstraSearch implements SearchStrategy {
         }
 
         while(!queue.isEmpty()){
+            Node curr = queue.poll();
 
+            for(Node n : graph.neighbors(curr)){
+                if(!acum.contains(n)){
+                    nodeMap.put(n,curr);
+                }
+                if(distance < graph.distance(n,curr)){
+                    distance = graph.distance(n,curr);
+                    Edge edge = new Edge(n,curr,graph.distance(n,curr));
+                }
 
+            }
         }
 
 
