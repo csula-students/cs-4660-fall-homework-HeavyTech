@@ -4,13 +4,13 @@ import csula.cs4660.graphs.Edge;
 import csula.cs4660.graphs.Graph;
 import csula.cs4660.graphs.Node;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
  * As name, dijkstra search using graph structure
  */
 public class DijkstraSearch implements SearchStrategy {
-
     /* Pseudocode
 
     function Dijkstra(Graph, source):
@@ -33,15 +33,13 @@ public class DijkstraSearch implements SearchStrategy {
     @Override
     public List<Edge> search(Graph graph, Node source, Node dist) {
 
-
-
         int distance = 0;
         Node endNode = null;
 
         HashMap<Node,Node> nodeMap = new HashMap<>();
         List<Node> acum = new ArrayList<>();
         Queue<Node> queue = new LinkedList<>();
-
+        ArrayList<Edge> edges = new ArrayList<>();
 
         queue.add(source);
 
@@ -62,18 +60,24 @@ public class DijkstraSearch implements SearchStrategy {
                 if(distance < graph.distance(n,curr)){
                     distance = graph.distance(n,curr);
                     Edge edge = new Edge(n,curr,graph.distance(n,curr));
+                    queue.poll();
+                    edges.add(edge);
                 }
 
             }
         }
 
+        ArrayList<Edge> reversedPath = new ArrayList<>();
 
+        //Reversing the Path.
+        for(int i = edges.size()-1; i >= 0; i --){
+            reversedPath.add(edges.get(i));
+        }
 
-
-
-
-
-
-        return null;
+        //Printing the result
+        for(Edge e : reversedPath) {
+            System.out.print(e);
+        }
+        return reversedPath;
     }
 }
