@@ -38,6 +38,9 @@ function minimax(graph, sourceNode, depth, maximizingPlayer) {
         // TODO: implement minimax to retrieve best move
         // NOTE: you should mutate graph and node as you traverse and update value
 
+
+        minMax(graph,root,depth,max);
+
         return null;
     }
 
