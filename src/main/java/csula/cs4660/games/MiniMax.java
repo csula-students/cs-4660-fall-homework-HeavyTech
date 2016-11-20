@@ -70,7 +70,9 @@ function minimax(graph, sourceNode, depth, maximizingPlayer) {
                 bestValue = Integer.max(bestValue, nodeValue);
             }
             return bestValue;
-        } else {
+
+
+        } else  {
             bestValue = Integer.MAX_VALUE;
             for (Node node : child) {
                 Integer nodeValue = minMax(graph, root, depth - 1, player);
