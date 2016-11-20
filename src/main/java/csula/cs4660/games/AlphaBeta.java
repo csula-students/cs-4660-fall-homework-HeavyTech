@@ -26,9 +26,7 @@ import java.util.List;
               if β ≤ α
                  break (* α cut-off *)
           return v
-
  */
-
 
 public class AlphaBeta {
     public static Node getBestMove(Graph graph, Node source, Integer depth, Integer alpha, Integer beta, Boolean max) {
@@ -45,49 +43,38 @@ public class AlphaBeta {
         }
 
 
-        if(max) {
+        if(max){
 
             int bestValue = Integer.MIN_VALUE;
 
-            for (Node n : children) {
-                int value = ((MiniMaxState) getBestMove(graph, source, depth - 1, alpha, beta, false).getData()).getValue();
-                bestValue = Math.max(bestValue, value);
-
-                if (bestValue > alpha) {
+            for(Node n : children){
+                int value = ((MiniMaxState)getBestMove(graph,source,depth-1,alpha,beta,false).getData()).getValue();
+                bestValue = Math.max(bestValue,value);
+                if(bestValue > alpha){
                     alpha = bestValue;
-                } else if (beta <= alpha) {
+                }
+                else if(beta <= alpha){
                     break;
                 }
-
             }
-            
+        return null;
         }
-          else{
+        else {
             int bestValue = Integer.MAX_VALUE;
 
-            for (Node n : children) {
-                int value = ((MiniMaxState) getBestMove(graph, source, depth - 1, alpha, beta, false).getData()).getValue();
-                bestValue = Math.max(bestValue, value);
+            for(Node n : children){
 
+                int value = ((MiniMaxState)getBestMove(graph,source,depth-1,alpha,beta,true).getData()).getValue();
+                bestValue = Math.max(bestValue,value);
 
-                if (bestValue < alpha) {
+                if(bestValue < alpha){
                     beta = bestValue;
-
-                } else if (beta >= alpha) {
+                }
+                else if(beta >= alpha){
                     break;
                 }
-
             }
-
-
-            }
-
+            return null;
         }
-
-
-
-
-        //Testing
-        return null;
     }
 }
