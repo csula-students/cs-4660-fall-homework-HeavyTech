@@ -6,7 +6,6 @@ import csula.cs4660.graphs.Node;
 import java.util.List;
 
 /*
-
  function alphabeta(node, depth, α, β, maximizingPlayer)
       if depth = 0 or node is a terminal node
           return the heuristic value of node
@@ -33,31 +32,35 @@ public class AlphaBeta {
         // TODO: implement your alpha beta pruning algorithm here
 
         List<Node> children = graph.neighbors(source);
-        MiniMaxState mmState;
-        Node<MiniMaxState> node;
+        MiniMaxState mmState = (MiniMaxState)source.getData();
+
+
+        int val = ((MiniMaxState) source.getData()).getValue();
+        Node<MiniMaxState> ending = graph.getNode(val).get();
+
 
         if ((depth == 0) || (children.size() == 0)) {
-            mmState =  new MiniMaxState(0,(Integer)source.getData());
-            node = new Node<>(mmState);
-            return node;
+            return source;
         }
 
-
         if(max){
-
             int bestValue = Integer.MIN_VALUE;
 
-            for(Node n : children){
-                int value = ((MiniMaxState)getBestMove(graph,source,depth-1,alpha,beta,false).getData()).getValue();
-                bestValue = Math.max(bestValue,value);
-                if(bestValue > alpha){
-                    alpha = bestValue;
-                }
-                else if(beta <= alpha){
-                    break;
+                for(Node n : children){
+
+                    int value = ((MiniMaxState)getBestMove(graph,source,depth-1,alpha,beta,false).getData()).getValue();
+                    bestValue = Math.max(bestValue,value);
+                    alpha = Math.max(bestValue,alpha);
+
+                    ending.getData().setValue(bestValue);
+                    ending = new Node<MiniMaxState>.getData().
+
+
+
+                     if(beta <= alpha){
+                         break;
                 }
             }
-        return null;
         }
         else {
             int bestValue = Integer.MAX_VALUE;
@@ -65,16 +68,17 @@ public class AlphaBeta {
             for(Node n : children){
 
                 int value = ((MiniMaxState)getBestMove(graph,source,depth-1,alpha,beta,true).getData()).getValue();
-                bestValue = Math.max(bestValue,value);
 
-                if(bestValue < alpha){
-                    beta = bestValue;
-                }
-                else if(beta >= alpha){
+                bestValue = Math.min(bestValue,value);
+                alpha = Math.min(bestValue,alpha);
+
+                if(beta <= alpha){
                     break;
                 }
             }
-            return null;
+
         }
+        return null;
     }
+
 }
