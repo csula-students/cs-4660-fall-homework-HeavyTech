@@ -52,11 +52,6 @@ public class AlphaBeta {
                     bestValue = Math.max(bestValue,value);
                     alpha = Math.max(bestValue,alpha);
 
-                    ending.getData().setValue(bestValue);
-                    ending = new Node<MiniMaxState>.getData().
-
-
-
                      if(beta <= alpha){
                          break;
                 }
@@ -70,7 +65,7 @@ public class AlphaBeta {
                 int value = ((MiniMaxState)getBestMove(graph,source,depth-1,alpha,beta,true).getData()).getValue();
 
                 bestValue = Math.min(bestValue,value);
-                alpha = Math.min(bestValue,alpha);
+                beta = Math.min(bestValue,beta);
 
                 if(beta <= alpha){
                     break;
