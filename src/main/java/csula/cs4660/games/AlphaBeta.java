@@ -67,6 +67,7 @@ public class AlphaBeta {
                 bestValue = Math.min(bestValue,value);
                 beta = Math.min(bestValue,beta);
 
+
                 if(beta <= alpha){
                     break;
                 }
