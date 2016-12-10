@@ -31,16 +31,18 @@ public class Player {
 	public static BoardGame bBoard;
 	public static int idPlayer = 0;
 
-	public Player(Node position, int direction, BoardGame bBoard){
-		Player.position = position;
-		this.direction = direction;
-		Player.bBoard = bBoard;
-		
-
-		Player.bBoard.setCell(Player.position, number++);
-
-	}
 	
+	
+//	public Player(Node position, int direction, BoardGame bBoard){
+//		Player.position = position;
+//		this.direction = direction;
+//		Player.bBoard = bBoard;
+//		
+//
+//		Player.bBoard.setCell(Player.position, number++);
+//
+//	}
+//	
 	public Player(Node position,BoardGame bBoard,int idPlayer){
 		Player.position = position;
 		Player.bBoard = bBoard;
@@ -120,6 +122,17 @@ public class Player {
 
 	}
 
+	
+	public static void clearBoard(int playerNumber){
+		for(int row = 0 ; row < 30; row++){
+			for(int col = 0 ; col < 20; col ++){
+				if(board[row][col] == playerNumber){
+					board[row][col] = -1;
+				}
+			}
+		}
+		
+	}
 
 	public static void main(String[] args) {
 
@@ -139,6 +152,9 @@ public class Player {
 				int Y0 = in.nextInt(); // starting Y coordinate of lightcycle (or -1)
 				int X1 = in.nextInt(); // starting X coordinate of lightcycle (can be the same as X0 if you play before this player)
 				int Y1 = in.nextInt(); // starting Y coordinate of lightcycle (can be the same as Y0 if you play before this player)
+				
+				System.err.println("X-coordinate" + X0 + "\n Y-coordinate" + Y0);
+				
 
 
 				if(i ==  0 && playerOne){
@@ -171,7 +187,18 @@ public class Player {
 					board.setCell(fourthPlayer, 4);
 					System.err.println("Fourth player added");
 				}
-			
+				else{
+					board.board[X1][Y1] = i;
+					if(i == P){
+						firstPlayer = nodeBoard[X1][Y1];
+					}
+					else{
+						secondPlayer  = nodeBoard[X1][Y1];
+					}
+					
+					
+				}
+				
 
 			}
 
